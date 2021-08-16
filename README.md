@@ -13,3 +13,5 @@ SendMessage
 2行目 x,y,z,world
 3行目 Message
 4行目 pok
+
+%name 看板をタップしたプレイヤーのユーザー名に置き換わります
