@@ -49,9 +49,9 @@ class main extends PluginBase implements Listener
                 $world_after = $line1[3];
                 $msg = $event->getLine(2);
                 if($event->getLine(3) == "pok"){
-                    $DATA = $x_after . ":" . $y_after . ":" . $z_after . ":" . $world_after . ":" . $msg .":". "p";
+                    $DATA = $x_after . ":" . $y_after . ":" . $z_after . ":" . $world_after . ":" . "broad" . ":" . $msg;
                 }else {
-                    $DATA = $x_after . ":" . $y_after . ":" . $z_after . ":" . $world_after . ":" . $msg;
+                    $DATA = $x_after . ":" . $y_after . ":" . $z_after . ":" . $world_after . ":" . "send" . ":" . $msg;
                 }
                 $this->sign->set($place_before, $DATA);
                 $this->sign->save();
@@ -82,22 +82,22 @@ class main extends PluginBase implements Listener
             $y_after = (float)$DATAS[1];
             $z_after = (float)$DATAS[2];
             $world_after = $this->getServer()->getLevelByName("{$DATAS[3]}");
-            if($DATAS[4] == NULL) {
+            if($DATAS[4] == "send") {
+                $this->getServer()->broadcastMessage($msg);
+            }else if($DATAS[4] == "broad"){
+                $player->sendMessage($msg);
+            }
+            if($DATAS[5] == NULL) {
                 $msg = "";
             }else{
-                if(strpos($DATAS[4],"%name") != false) {
-                    $msg = str_replace("%name", $name, $DATAS[4]);
+                if(strpos($DATAS[5],"%name") != false) {
+                    $msg = str_replace("%name", $name, $DATAS[5]);
                 }else{
-                    $msg = $DATAS[4];
+                    $msg = $DATAS[5];
                 }
             }
             $pos = new Position($x_after,$y_after,$z_after,$world_after);
             $player->teleport($pos);
-            if($DATAS[5] == NULL) {
-                $this->getServer()->broadcastMessage($msg);
-            }else if($DATAS[5] == "p"){
-                $player->sendMessage($msg);
-            }
         }
     }
 
