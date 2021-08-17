@@ -85,7 +85,7 @@ class main extends PluginBase implements Listener
             if($DATAS[5] == NULL) {
                 $msg = "";
             }else{
-                if(preg_match("%name",$DATAS[5]) != false) {
+                if(strstr($DATAS[5],"%name") != false) {
                     $msg = str_replace("%name", $name, $DATAS[5]);
                 }else{
                     $msg = $DATAS[5];
