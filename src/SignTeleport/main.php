@@ -82,11 +82,6 @@ class main extends PluginBase implements Listener
             $y_after = (float)$DATAS[1];
             $z_after = (float)$DATAS[2];
             $world_after = $this->getServer()->getLevelByName("{$DATAS[3]}");
-            if($DATAS[4] == "send") {
-                $this->getServer()->broadcastMessage($msg);
-            }else if($DATAS[4] == "broad"){
-                $player->sendMessage($msg);
-            }
             if($DATAS[5] == NULL) {
                 $msg = "";
             }else{
@@ -95,6 +90,11 @@ class main extends PluginBase implements Listener
                 }else{
                     $msg = $DATAS[5];
                 }
+            }
+            if($DATAS[4] == "send") {
+                $this->getServer()->broadcastMessage($msg);
+            }else if($DATAS[4] == "broad"){
+                $player->sendMessage($msg);
             }
             $pos = new Position($x_after,$y_after,$z_after,$world_after);
             $player->teleport($pos);
